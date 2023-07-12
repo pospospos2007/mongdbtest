@@ -88,5 +88,5 @@ exports = function(payload, response) {
         // })
             
     
-    return data;
+    return payload.body.text();
 };
