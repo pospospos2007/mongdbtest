@@ -47,7 +47,6 @@ exports = function(payload, response) {
     
     // Payload body is a JSON string, convert into a JavaScript Object
         const data = JSON.parse(payload.body.text())
-        
 
         // // Each record is a Base64 encoded JSON string
         // const documents = data.records.map((record) => {
@@ -89,5 +88,5 @@ exports = function(payload, response) {
         // })
             
     
-    return payload.body._id.text();
+    return data;
 };
