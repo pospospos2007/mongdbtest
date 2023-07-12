@@ -88,5 +88,5 @@ exports = function(payload, response) {
         // })
             
     
-    return " reqBody.text()";
+    return payload.body.text();
 };
