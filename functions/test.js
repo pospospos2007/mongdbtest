@@ -58,7 +58,7 @@ exports = function({ query, headers, body}, response) {
         })
 
         // Perform operations as a bulk
-        const bulkOp = context.services.get("mongodb-atlas").db("monitors").collection("firehose").initializeOrderedBulkOp()
+        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
         documents.forEach((document) => {
             bulkOp.find({ _id:document._id }).upsert().updateOne(document)
         })
@@ -72,7 +72,7 @@ exports = function({ query, headers, body}, response) {
             // All operations completed successfully
             response.setStatusCode(200)
             response.setBody(JSON.stringify({
-                requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+                requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime()
             }))
             return
@@ -80,7 +80,7 @@ exports = function({ query, headers, body}, response) {
             // Catch any error with execution and return a 500 
             response.setStatusCode(500)
             response.setBody(JSON.stringify({
-                requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+                requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime(),
                 errorMessage: error
             }))
