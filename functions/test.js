@@ -28,5 +28,65 @@ exports = function({ query, headers, body}, response) {
 
     // The return value of the function is sent as the response back to the client
     // when the "Respond with Result" setting is set.
+    
+    
+     /* Using Buffer in Realm causes a severe performance hit
+    this function is ~6 times faster
+    */
+    const decodeBase64 = (s) => {
+        var e={},i,b=0,c,x,l=0,a,r='',w=String.fromCharCode,L=s.length
+        var A="ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/"
+        for(i=0;i<64;i++){e[A.charAt(i)]=i}
+        for(x=0;x<L;x++){
+            c=e[s.charAt(x)];b=(b<<6)+c;l+=6
+            while(l>=8){((a=(b>>>(l-=8))&0xff)||(x<(L-2)))&&(r+=w(a))}
+        }
+        return r
+    }
+    
+    
+    // Payload body is a JSON string, convert into a JavaScript Object
+        const data = JSON.parse(payload.body.text())
+
+        // Each record is a Base64 encoded JSON string
+        const documents = data.records.map((record) => {
+            const document = JSON.parse(decodeBase64(record.data))
+            return {
+                ...document,
+                _id: new BSON.ObjectId(document._id)
+            }
+        })
+
+        // Perform operations as a bulk
+        const bulkOp = context.services.get("mongodb-atlas").db("monitors").collection("firehose").initializeOrderedBulkOp()
+        documents.forEach((document) => {
+            bulkOp.find({ _id:document._id }).upsert().updateOne(document)
+        })
+
+        response.addHeader(
+            "Content-Type",
+            "application/json"
+        )
+
+        bulkOp.execute().then(() => {
+            // All operations completed successfully
+            response.setStatusCode(200)
+            response.setBody(JSON.stringify({
+                requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+                timestamp: (new Date()).getTime()
+            }))
+            return
+        }).catch((error) => {
+            // Catch any error with execution and return a 500 
+            response.setStatusCode(500)
+            response.setBody(JSON.stringify({
+                requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+                timestamp: (new Date()).getTime(),
+                errorMessage: error
+            }))
+            return
+        })
+            
+    
     return  reqBody.text();
 };
