@@ -78,20 +78,20 @@ exports = function(payload, response) {
 
         bulkOp.execute().then(() => {
             // All operations completed successfully
-            // response.setStatusCode(200)
-            // response.setBody(JSON.stringify({
-            //     requestId:  Math.floor(Math.random() * 1000),
-            //     timestamp: (new Date()).getTime()
-            // }))
+            response.setStatusCode(200)
+            response.setBody(JSON.stringify({
+                requestId:  Math.floor(Math.random() * 1000),
+                timestamp: (new Date()).getTime()
+            }))
             return 
         }).catch((error) => {
             // Catch any error with execution and return a 500 
-            // response.setStatusCode(500)
-            // response.setBody(JSON.stringify({
-            //     requestId:  Math.floor(Math.random() * 1000),
-            //     timestamp: (new Date()).getTime(),
-            //     errorMessage: data
-            // }))
+            response.setStatusCode(500)
+            response.setBody(JSON.stringify({
+                requestId:  Math.floor(Math.random() * 1000),
+                timestamp: (new Date()).getTime(),
+                errorMessage: data
+            }))
             return 
         })
             
