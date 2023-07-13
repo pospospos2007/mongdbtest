@@ -78,7 +78,7 @@ exports = function(payload, response) {
                 requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime()
             }))
-            return 
+            return data
         }).catch((error) => {
             // Catch any error with execution and return a 500 
             response.setStatusCode(500)
@@ -87,7 +87,7 @@ exports = function(payload, response) {
                 timestamp: (new Date()).getTime(),
                 errorMessage: error
             }))
-            return 
+            return data
         })
             
     
