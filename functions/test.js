@@ -78,16 +78,16 @@ exports = function(payload, response) {
                 requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime()
             }))
-            return data
+            return 
         }).catch((error) => {
             // Catch any error with execution and return a 500 
             response.setStatusCode(500)
             response.setBody(JSON.stringify({
                 requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime(),
-                errorMessage: error
+                errorMessage: data
             }))
-            return data
+            return 
         })
             
     
