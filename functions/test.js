@@ -46,8 +46,8 @@ exports = function(payload, response) {
     
     
     // Payload body is a JSON string, convert into a JavaScript Object
-        const data = JSON.parse(payload.body.text())
-        // const data ={"timestamp":{"clusterTime":1689246131000,"received":1689246131199},"event":{"_id":{"_data":"8264AFD9B3000000072B022C0100296E5A10046168B795C70D4DCAB37BA5BADF3B7C4346645F6964006464AFCAC2582316AE841840330004"},"operationType":"delete","wallTime":"2023-07-13T11:02:11.016Z","documentKey":{"_id":"64afcac2582316ae84184033"}}}
+        // const data = JSON.parse(payload.body.text())
+        const data ={"timestamp":{"clusterTime":1689246131000,"received":1689246131199},"event":{"_id":{"_data":"8264AFD9B3000000072B022C0100296E5A10046168B795C70D4DCAB37BA5BADF3B7C4346645F6964006464AFCAC2582316AE841840330004"},"operationType":"delete","wallTime":"2023-07-13T11:02:11.016Z","documentKey":{"_id":"64afcac2582316ae84184033"}}}
 
         // // Each record is a Base64 encoded JSON string
         // const documents = data.records.map((record) => {
@@ -66,10 +66,10 @@ exports = function(payload, response) {
 
         bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
 
-        // response.addHeader(
-        //     "Content-Type",
-        //     "application/json"
-        // )
+        response.addHeader(
+            "Content-Type",
+            "application/json"
+        )
 
         bulkOp.execute().then(() => {
             // All operations completed successfully
