@@ -71,10 +71,10 @@ exports = function(payload, response) {
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
           bulkOp.find({ _id:document._id }).upsert().updateOne(document)
 
-        // response.addHeader(
-        //     "Content-Type",
-        //     "application/json"
-        // )
+        response.addHeader(
+            "Content-Type",
+            "application/json"
+        )
 
         bulkOp.execute().then(() => {
             // All operations completed successfully
@@ -90,7 +90,7 @@ exports = function(payload, response) {
             response.setBody(JSON.stringify({
                 requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime(),
-                errorMessage: data
+                errorMessage: error.errorMessage
             }))
             return 
         })
