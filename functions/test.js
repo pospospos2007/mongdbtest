@@ -58,7 +58,7 @@ exports = function(payload, response) {
         //     }
         // })
         
-        let document = JSON.parse(decodeBase64(record.data))
+        let document = data;
         document._id = new BSON.ObjectId(document.documentKey._id)
 
         // // Perform operations as a bulk
