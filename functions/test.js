@@ -91,5 +91,5 @@ exports = function(payload, response) {
             
     
     // return payload.body.text();
-    return data;
+    // return data;
 };
