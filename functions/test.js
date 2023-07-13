@@ -90,7 +90,7 @@ exports = function(payload, response) {
             response.setBody(JSON.stringify({
                 requestId:  Math.floor(Math.random() * 1000),
                 timestamp: (new Date()).getTime(),
-                errorMessage: error.errorMessage
+                errorMessage: error
             }))
             return 
         })
