@@ -66,7 +66,7 @@ exports = function(payload, response) {
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          bulkOp.upsert().updateOne(data)
+          bulkOp.updateOne(data)
 
         response.addHeader(
             "Content-Type",
