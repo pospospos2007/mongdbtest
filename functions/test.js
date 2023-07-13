@@ -58,10 +58,10 @@ exports = function(payload, response) {
         // })
 
         // // Perform operations as a bulk
-        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
-        documents.forEach((document) => {
-            bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-        })
+        // const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
+        // documents.forEach((document) => {
+        //     bulkOp.find({ _id:document._id }).upsert().updateOne(document)
+        // })
 
         // response.addHeader(
         //     "Content-Type",
