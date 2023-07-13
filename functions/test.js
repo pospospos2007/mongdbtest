@@ -49,19 +49,19 @@ exports = function(payload, response) {
         const data = JSON.parse(payload.body.text())
 
         // // Each record is a Base64 encoded JSON string
-        // const documents = data.records.map((record) => {
-        //     const document = JSON.parse(decodeBase64(record.data))
-        //     return {
-        //         ...document,
-        //         _id: new BSON.ObjectId(document._id)
-        //     }
-        // })
+        const documents = data.map((record) => {
+            const document = JSON.parse(decodeBase64(record.data))
+            return {
+                ...document,
+                _id: new BSON.ObjectId(document._id)
+            }
+        })
 
         // // Perform operations as a bulk
-        // const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
-        // documents.forEach((document) => {
-        //     bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-        // })
+        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
+        documents.forEach((document) => {
+            bulkOp.find({ _id:document._id }).upsert().updateOne(document)
+        })
 
         // response.addHeader(
         //     "Content-Type",
