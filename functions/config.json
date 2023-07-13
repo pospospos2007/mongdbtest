@@ -2,7 +2,7 @@
     {
         "name": "test",
         "private": false,
-        "run_as_user_id": "64adf029b49586931914e9c8",
+        "run_as_system": true,
         "disable_arg_logs": true
     }
 ]
