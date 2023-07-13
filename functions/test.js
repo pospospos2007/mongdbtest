@@ -57,6 +57,9 @@ exports = function(payload, response) {
         //         _id: new BSON.ObjectId(document._id)
         //     }
         // })
+        
+        let document = JSON.parse(decodeBase64(record.data))
+        document._id = new BSON.ObjectId(document.documentKey._id)
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
@@ -66,7 +69,7 @@ exports = function(payload, response) {
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          bulkOp.find({ _id:'64b02e99e7168ebf8a32e5b6' }).upsert().updateOne(data)
+          bulkOp.find({ _id:document._id }).upsert().updateOne(document)
 
         // response.addHeader(
         //     "Content-Type",
