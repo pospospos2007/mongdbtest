@@ -59,7 +59,7 @@ exports = function(payload, response) {
         // })
         
         let document = data;
-        document._id = new BSON.ObjectId(document.event.documentKey._id)
+        // document._id = new BSON.ObjectId(document.event.documentKey._id)
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
@@ -69,7 +69,7 @@ exports = function(payload, response) {
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document})
+          bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
           // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
 
         response.addHeader(
