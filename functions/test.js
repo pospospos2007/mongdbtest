@@ -46,8 +46,8 @@ exports = function(payload, response) {
     
     
     // Payload body is a JSON string, convert into a JavaScript Object
-        // const data = JSON.parse(payload.body.text())
-        const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
+        const data = JSON.parse(payload.body.text())
+        // const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
 
         // // Each record is a Base64 encoded JSON string
         // const documents = data.records.map((record) => {
@@ -66,7 +66,7 @@ exports = function(payload, response) {
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          bulkOp.find({ _id:data._id }).upsert().updateOne(data)
+          bulkOp.find({ _id:'64b02e99e7168ebf8a32e5b6' }).upsert().updateOne(data)
 
         // response.addHeader(
         //     "Content-Type",
