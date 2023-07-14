@@ -46,7 +46,7 @@ exports = function(payload, response) {
     
     
     // Payload body is a JSON string, convert into a JavaScript Object
-        let data = JSON.parse(decodeBase64(payload.body.text()))
+        // let data = JSON.parse(decodeBase64(payload.body.text()))
         // const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
 
         // // Each record is a Base64 encoded JSON string
@@ -58,34 +58,34 @@ exports = function(payload, response) {
         //     }
         // })
         
-        let document = data;
+        // let document = data;
         // document._id = new BSON.ObjectId(document.event.documentKey._id)
 
         // // Perform operations as a bulk
-        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
+        // const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
         // documents.forEach((document) => {
         //     bulkOp.find({ _id:document._id }).upsert().updateOne(document)
         // })
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
-          // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
+        //   bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
+        //   // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
 
-        response.addHeader(
-            "Content-Type",
-            "application/json"
-        )
+        // response.addHeader(
+        //     "Content-Type",
+        //     "application/json"
+        // )
 
-        bulkOp.execute().then(() => {
-            // All operations completed successfully
-            response.setStatusCode(200)
-            response.setBody(JSON.stringify({
-                requestId:  Math.floor(Math.random() * 1000),
-                timestamp: (new Date()).getTime()
-            }))
-            return 
-        })
+        // bulkOp.execute().then(() => {
+        //     // All operations completed successfully
+        //     response.setStatusCode(200)
+        //     response.setBody(JSON.stringify({
+        //         requestId:  Math.floor(Math.random() * 1000),
+        //         timestamp: (new Date()).getTime()
+        //     }))
+        //     return 
+        // })
         // .catch((error) => {
         //     // Catch any error with execution and return a 500 
         //     response.setStatusCode(500)
@@ -98,6 +98,6 @@ exports = function(payload, response) {
         // })
             
     
-    // return payload.body.text();
+    return payload.body.text();
     // return data;
 };
