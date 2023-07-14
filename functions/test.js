@@ -64,7 +64,15 @@ exports = function(payload, response) {
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
         documents.forEach((document) => {
-            bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document})
+          
+            if(document.operationType=='update'){
+              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document.event.fullDocument})
+            }else if (document.operationType=='delete'){
+              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document})
+            }else if (document.operationType=='insert'){
+              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document})
+            }
+            
         })
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
