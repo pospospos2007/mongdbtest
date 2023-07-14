@@ -90,9 +90,8 @@ exports = function(payload, response) {
             "application/json"
         )
         
-        bulkOp2.execute().then(() => {
-            
-           axios.get('https://api.github.com/users/mapbox')
+        
+        axios.get('https://api.github.com/users/mapbox')
           .then((response) => {
             console.log(response.data);
             console.log(response.status);
@@ -100,6 +99,10 @@ exports = function(payload, response) {
             console.log(response.headers);
             console.log(response.config);
           });
+          
+        bulkOp2.execute().then(() => {
+            
+           
         })
         
         
