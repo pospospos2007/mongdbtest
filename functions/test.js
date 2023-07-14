@@ -63,14 +63,17 @@ exports = function(payload, response) {
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
+        const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("test2").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
+              bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
+              bulkOp2.find({ _id:document._id }).delete();
             }
             
         })
@@ -85,6 +88,8 @@ exports = function(payload, response) {
             "Content-Type",
             "application/json"
         )
+        
+        bulkOp2.execute();
 
         bulkOp.execute().then(() => {
             // All operations completed successfully
