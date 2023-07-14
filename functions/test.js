@@ -49,29 +49,29 @@ exports = function(payload, response) {
         let data = JSON.parse(payload.body.text())
         // const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
 
-        // // Each record is a Base64 encoded JSON string
-        // const documents = data.records.map((record) => {
-        //     const document = JSON.parse(decodeBase64(record.data))
-        //     return {
-        //         ...document,
-        //         _id: new BSON.ObjectId(document._id)
-        //     }
-        // })
+        // Each record is a Base64 encoded JSON string
+        const documents = data.records.map((record) => {
+            const document = JSON.parse(decodeBase64(record.data))
+            return {
+                ...document,
+                _id: new BSON.ObjectId(document.event.documentKey._id )
+            }
+        })
         
-        let document = data;
-        // document._id = new BSON.ObjectId(document.event.documentKey._id)
+        // let document = data;
+        document._id = new BSON.ObjectId(document.event.documentKey._id)
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
-        // documents.forEach((document) => {
-        //     bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-        // })
+        documents.forEach((document) => {
+            bulkOp.find({ _id:document._id }).upsert().updateOne(document)
+        })
 
         // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
           // bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
           // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-           bulkOp.find({ _id:Math.random() * 1000}).upsert().updateOne({$set:document})
+          // bulkOp.find({ _id:Math.random() * 1000}).upsert().updateOne({$set:document})
 
         response.addHeader(
             "Content-Type",
@@ -82,7 +82,7 @@ exports = function(payload, response) {
             // All operations completed successfully
             response.setStatusCode(200)
             response.setBody(JSON.stringify({
-                requestId:  Math.floor(Math.random() * 1000),
+                requestId: data.requestId,
                 timestamp: (new Date()).getTime()
             }))
             return 
