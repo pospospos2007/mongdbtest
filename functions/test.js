@@ -66,7 +66,7 @@ exports = function(payload, response) {
         documents.forEach((document) => {
           
             if(document.event.operationType=='update'){
-              let obj = document.event.fullDocument;
+              let obj = document;
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document.event.fullDocument})
             }else if (document.event.operationType=='delete'){
