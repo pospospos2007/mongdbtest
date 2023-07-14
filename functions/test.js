@@ -46,7 +46,7 @@ exports = function(payload, response) {
     
     
     // Payload body is a JSON string, convert into a JavaScript Object
-        let data = JSON.parse(payload.body.text())
+        let data = JSON.parse(decodeBase64(payload.body.text()))
         // const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
 
         // // Each record is a Base64 encoded JSON string
