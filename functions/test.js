@@ -71,7 +71,7 @@ exports = function(payload, response) {
           // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
           // bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
           // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-           bulkOp.find({ _id:'dddd'}).upsert().updateOne({$set:document})
+           bulkOp.find({ _id:Math.random() * 1000}).upsert().updateOne({$set:document})
 
         response.addHeader(
             "Content-Type",
