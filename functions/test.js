@@ -59,7 +59,7 @@ exports = function(payload, response) {
         })
         
         // let document = data;
-        document._id = new BSON.ObjectId(document.event.documentKey._id)
+        // document._id = new BSON.ObjectId(document.event.documentKey._id)
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
