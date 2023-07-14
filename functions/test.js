@@ -1,5 +1,6 @@
 // This function is the endpoint's request handler.
 exports = function(payload, response) {
+  const axios = require('axios');
     // Data can be extracted from the request as follows:
 
     // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
@@ -91,7 +92,6 @@ exports = function(payload, response) {
         
         bulkOp2.execute().then(() => {
             
-           const axios  = context.services.get("axios")
            axios.get('https://api.github.com/users/mapbox')
           .then((response) => {
             console.log(response.data);
