@@ -68,7 +68,7 @@ exports = function(payload, response) {
             if(document.event.operationType=='update'){
               let obj = document;
               delete obj.event.fullDocument._id;
-              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document.event.fullDocument})
+              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:document})
             }else if (document.event.operationType=='insert'){
