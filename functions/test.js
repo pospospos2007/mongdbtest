@@ -91,7 +91,8 @@ exports = function(payload, response) {
         
         bulkOp2.execute().then(() => {
             
-           context.services.get("axios").get('https://api.github.com/users/mapbox')
+           const axios  = context.services.get("axios")
+           axios.get('https://api.github.com/users/mapbox')
           .then((response) => {
             console.log(response.data);
             console.log(response.status);
