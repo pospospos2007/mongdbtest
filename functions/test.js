@@ -71,10 +71,10 @@ exports = function(payload, response) {
               let obj = document;
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
-              bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
+              bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:payload.headers})
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
-              bulkOp2.find({ _id:document._id }).delete();
+               bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:payload.headers})
             }
             
         })
