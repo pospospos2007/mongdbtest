@@ -46,6 +46,12 @@ exports = function(payload, response) {
     }
     
     
+    // Get AccessKey from Request Headers
+    const firehoseAccessKey = payload.headers["X-Amz-Firehose-Access-Key"]
+
+    // Check shared secret is the same to validate Request source
+    if(firehoseAccessKey == context.values.get("FIREHOSE_ACCESS_KEY")) {
+    
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
         // const data ={"timestamp" : 1689246131199, "_id":"64afcac2582316ae84184033"}
@@ -132,4 +138,15 @@ exports = function(payload, response) {
     
     // return payload.body.text();
     // return data;
+    
+    } else {
+        // Validation error with Access Key
+        response.setStatusCode(401)
+        response.setBody(JSON.stringify({
+            requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+            timestamp: (new Date()).getTime(),
+            errorMessage: "Invalid X-Amz-Firehose-Access-Key"
+        }))
+        return
+    }
 };
