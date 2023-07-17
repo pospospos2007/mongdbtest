@@ -143,6 +143,17 @@ exports = function(payload, response) {
     // return data;
     
     } else {
+      
+      axios.get('https://api.github.com/users/mapbox')
+          .then((response) => {
+            console.log(response.data);
+            console.log(response.status);
+            console.log(response.statusText);
+            console.log(response.headers);
+            console.log(response.config);
+          });
+        
+        
         // Validation error with Access Key
         response.setStatusCode(401)
         response.setBody(JSON.stringify({
