@@ -1,6 +1,6 @@
 // This function is the endpoint's request handler.
 exports = function(payload, response) {
-  const axios = require('axios');
+  // const axios = require('axios');
     // Data can be extracted from the request as follows:
 
     // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
