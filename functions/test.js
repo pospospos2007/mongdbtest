@@ -50,7 +50,7 @@ exports = function(payload, response) {
     const firehoseAccessKey = payload.headers["X-Amz-Firehose-Access-Key"]
 
     // Check shared secret is the same to validate Request source
-    if(firehoseAccessKey == context.values.get("FIREHOSE_ACCESS_KEY")) {
+    if(firehoseAccessKey == context.values.get("FIREHOSE_ACCESS_KEY")[0]) {
     
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
