@@ -153,18 +153,26 @@ exports = function(payload, response) {
       //       console.log(response.config);
       //     });
         
-        const http = context.services.get("myHttp");
-  return http.get({
-      url: "https://api.github.com/users/mapbox"
-      // body: { msg: "This is in the body of a POST request!" },
-      // encodeBodyAsJSON: true
-    })
-    .then(response => {
+        
+        context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
       // The response body is encoded as raw BSON.Binary. Parse it to JSON.
       console.log(response)
       // const ejson_body = EJSON.parse(response.body.text());
       // return ejson_body;
     })
+        
+  //       const http = context.services.get("myHttp");
+  // http.get({
+  //     url: "https://api.github.com/users/mapbox"
+  //     // body: { msg: "This is in the body of a POST request!" },
+  //     // encodeBodyAsJSON: true
+  //   })
+  //   .then(response => {
+  //     // The response body is encoded as raw BSON.Binary. Parse it to JSON.
+  //     console.log(response)
+  //     // const ejson_body = EJSON.parse(response.body.text());
+  //     // return ejson_body;
+  //   })
     
         
         // Validation error with Access Key
