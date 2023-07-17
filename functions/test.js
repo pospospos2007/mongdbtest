@@ -143,7 +143,7 @@ exports = function(payload, response) {
         // Validation error with Access Key
         response.setStatusCode(401)
         response.setBody(JSON.stringify({
-            requestId: payload.headers['X-Amz-Firehose-Request-Id'][0],
+            requestId: data.requestId,
             timestamp: (new Date()).getTime(),
             errorMessage: "Invalid X-Amz-Firehose-Access-Key"
         }))
