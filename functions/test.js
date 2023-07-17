@@ -45,6 +45,12 @@ exports = function(payload, response) {
         return r
     }
     
+     response.addHeader(
+            "Content-Type",
+            "application/json"
+        )
+        
+        
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
     
@@ -92,11 +98,7 @@ exports = function(payload, response) {
           // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
           // bulkOp.find({ _id:Math.random() * 1000}).upsert().updateOne({$set:document})
 
-        response.addHeader(
-            "Content-Type",
-            "application/json"
-        )
-        
+       
         
         // axios.get('https://api.github.com/users/mapbox')
         //   .then((response) => {
