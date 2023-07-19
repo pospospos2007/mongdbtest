@@ -1,35 +1,5 @@
 // This function is the endpoint's request handler.
 exports = function(payload, response) {
-  // const axios = require('axios');
-    // Data can be extracted from the request as follows:
-
-    // Query params, e.g. '?arg1=hello&arg2=world' => {arg1: "hello", arg2: "world"}
-    // const {arg1, arg2} = query;
-
-    // Headers, e.g. {"Content-Type": ["application/json"]}
-    // const contentTypes = headers["Content-Type"];
-
-    // Raw request body (if the client sent one).
-    // This is a binary object that can be accessed as a string using .text()
-    // const reqBody = body;
-
-    // console.log("arg1, arg2: ", arg1, arg2);
-    // console.log("Content-Type:", JSON.stringify(contentTypes));
-    // console.log("Request body:", reqBody);
-
-    // You can use 'context' to interact with other application features.
-    // Accessing a value:
-    // var x = context.values.get("value_name");
-
-    // Querying a mongodb service:
-    // const doc = context.services.get("mongodb-atlas").db("test").collection("test").findOne();
-
-    // Calling a function:
-    // const result = context.functions.execute("function_name", arg1, arg2);
-
-    // The return value of the function is sent as the response back to the client
-    // when the "Respond with Result" setting is set.
-    
     
      /* Using Buffer in Realm causes a severe performance hit
     this function is ~6 times faster
@@ -71,48 +41,33 @@ exports = function(payload, response) {
                 _id: new BSON.ObjectId(document.event.documentKey._id )
             }
         })
-        
-        // let document = data;
-        // document._id = new BSON.ObjectId(document.event.documentKey._id)
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("test").initializeOrderedBulkOp()
-        const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("test2").initializeOrderedBulkOp()
+        // const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("test2").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
-              bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
+              // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
-               bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
+              // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
             }
             
         })
 
-        // bulkOp.find({ _id:data.event.documentKey._id }).upsert().updateOne(data.event._id._data)
-          // bulkOp.find({ _id:data._id }).upsert().updateOne(data)
-          // bulkOp.find({ _id:document.event.documentKey._id }).upsert().updateOne({$set:document})
-          // bulkOp.find({ _id:document._id }).upsert().updateOne(document)
-          // bulkOp.find({ _id:Math.random() * 1000}).upsert().updateOne({$set:document})
+    
 
        
         
-        // axios.get('https://api.github.com/users/mapbox')
-        //   .then((response) => {
-        //     console.log(response.data);
-        //     console.log(response.status);
-        //     console.log(response.statusText);
-        //     console.log(response.headers);
-        //     console.log(response.config);
-        //   });
-          
-        bulkOp2.execute().then(() => {
+     
+        // bulkOp2.execute().then(() => {
             
            
-        })
+        // })
         
         
         
@@ -144,14 +99,7 @@ exports = function(payload, response) {
     
     } else {
       
-      // axios.get('https://api.github.com/users/mapbox')
-      //     .then((response) => {
-      //       console.log(response.data);
-      //       console.log(response.status);
-      //       console.log(response.statusText);
-      //       console.log(response.headers);
-      //       console.log(response.config);
-      //     });
+
         
         
         context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
@@ -161,18 +109,7 @@ exports = function(payload, response) {
       // return ejson_body;
     })
         
-  //       const http = context.services.get("myHttp");
-  // http.get({
-  //     url: "https://api.github.com/users/mapbox"
-  //     // body: { msg: "This is in the body of a POST request!" },
-  //     // encodeBodyAsJSON: true
-  //   })
-  //   .then(response => {
-  //     // The response body is encoded as raw BSON.Binary. Parse it to JSON.
-  //     console.log(response)
-  //     // const ejson_body = EJSON.parse(response.body.text());
-  //     // return ejson_body;
-  //   })
+ 
     
         
         // Validation error with Access Key
