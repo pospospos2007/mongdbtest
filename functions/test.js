@@ -44,7 +44,7 @@ exports = function(payload, response) {
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-products-details-qa").initializeOrderedBulkOp()
-        // const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("test2").initializeOrderedBulkOp()
+        // const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
