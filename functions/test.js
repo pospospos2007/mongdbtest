@@ -52,6 +52,14 @@ exports = function(payload, response) {
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
+              
+              
+              
+              const functionName = "test2";
+              const args = [2, 3];
+              const result =  user.callFunction(functionName, ...args);
+              
+              
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
