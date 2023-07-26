@@ -55,7 +55,7 @@ exports = function(payload, response) {
               
               let functionName = "test2";
               let args = [2, 3];
-              let result =  user.callFunction(functionName, ...args);
+              user.callFunction(functionName, ...args);
 
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
