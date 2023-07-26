@@ -1,16 +1,18 @@
-exports = async function (a, b) {
+exports =  function (a, b) {
   
   // await context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
   //     console.log("data:", response.body.text())
   //   })
-    
-     await context.http.get({ url: "dddadsasd.com" }).then(response => {
+    try{
+      context.http.get({ url: "dddadsasd.com" }).then(response => {
       // The response body is encoded as raw BSON.Binary. Parse it to JSON.
       console.log("data:", response.body.text())
       // const ejson_body = EJSON.parse(response.body.text());
       // return ejson_body;
     })
-    
+    }catch(err){
+      console.log("error occured but do nothing");
+    }
     
   // console.log("a:",a);
   // console.log("b:",b);
