@@ -57,7 +57,7 @@ exports = function(payload, response) {
               
               const functionName = "test2";
               const args = [2, 3];
-              const result =  user.callFunction(functionName, ...args);
+              const result =  User.callFunction(functionName, ...args);
               
               
             }else if (document.event.operationType=='delete'){
