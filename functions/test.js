@@ -44,7 +44,7 @@ exports = function(payload, response) {
 
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-products-details-qa").initializeOrderedBulkOp()
-        // const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
+        const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
@@ -53,11 +53,15 @@ exports = function(payload, response) {
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
+              let obj2 = document;
+              delete obj2.event.fullDocument._id;
+              obj2.event.fullDocument["is_send"]= false;
+              obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
+              bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:obj2.event.fullDocument})
               
-              
-              const functionName = "test2";
-              const args = [2, 3];
-              context.functions.execute(functionName, ...args)
+              // const functionName = "test2";
+              // const args = [2, 3];
+              // context.functions.execute(functionName, ...args)
               
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
@@ -71,10 +75,12 @@ exports = function(payload, response) {
        
         
      
-        // bulkOp2.execute().then(() => {
-            
+        bulkOp2.execute().then(() => {
+            const functionName = "test2";
+              const args = [2, 3];
+              context.functions.execute(functionName, ...args)
            
-        // })
+        })
         
         
         
