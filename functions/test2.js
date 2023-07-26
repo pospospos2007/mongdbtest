@@ -9,7 +9,7 @@ exports =  function (a, b) {
       console.log("data:", response.body.text())
       // const ejson_body = EJSON.parse(response.body.text());
       // return ejson_body;
-    }).err(error => {
+    }).error(error => {
       console.log("error: ","don't do anyting");
     })
 
