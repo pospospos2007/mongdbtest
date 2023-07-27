@@ -1,4 +1,5 @@
 // This function is the endpoint's request handler.
+const uuidv4 = require("uuid/v4")
 exports = function(payload, response) {
     
      /* Using Buffer in Realm causes a severe performance hit
@@ -54,26 +55,30 @@ exports = function(payload, response) {
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
               let obj2 = document;
+              let uuid = uuidv4();
               obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
               delete obj2.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
+              obj2.event.fullDocument["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
               
-              // const functionName = "test2";
-              // const args = [2, 3];
-              // context.functions.execute(functionName, ...args)
+              const functionName = "test2";
+              const args = [2, 3];
+              context.functions.execute(functionName, ...args)
               
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
               
               let obj2 = document;
+              let uuid = uuidv4();
               obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
               delete obj2.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
+              obj2.event.fullDocument["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
               
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
@@ -95,11 +100,8 @@ exports = function(payload, response) {
       //   });
         
      
-        bulkOp2.execute().then((err, result) => {
-            const functionName = "test2";
-            console.log("result:", JSON.stringify(result));
-            const args = [2, 3];
-            context.functions.execute(functionName, ...args)
+        bulkOp2.execute().then(() => {
+            
            
         })
         
