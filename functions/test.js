@@ -77,6 +77,7 @@ exports = function(payload, response) {
               bulkOp2.insert(obj2.event.fullDocument)
               
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
+              
             }
             
         })
@@ -84,6 +85,10 @@ exports = function(payload, response) {
     
 
        
+      // bulkOp2.execute(function(err, result) {
+      //       insertedIds = insertedIds.concat(getInsertedIds(result));
+      //       console.log(insertedIds);
+      //   });
         
      
         bulkOp2.execute().then(() => {
