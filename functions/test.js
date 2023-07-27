@@ -97,7 +97,7 @@ exports = function(payload, response) {
      
         bulkOp2.execute().then((err, result) => {
             const functionName = "test2";
-            console.log("result:", result);
+            console.log("result:", result.text());
             const args = [2, 3];
             context.functions.execute(functionName, ...args)
            
