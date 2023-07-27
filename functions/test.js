@@ -89,7 +89,7 @@ exports = function(payload, response) {
             // insertedIds = insertedIds.concat(getInsertedIds(result));
             // console.log(insertedIds);
             const functionName = "test2";
-            const args = [result.getInsertedIds, 3];
+            const args = [result.getInsertedIds[0], 3];
             context.functions.execute(functionName, ...args)
         });
         
