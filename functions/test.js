@@ -65,7 +65,7 @@ exports = function(payload, response) {
               bulkOp2.insert(obj2.event.fullDocument)
               
               const functionName = "test2";
-              const args = [2, 3];
+              const args = [uuid];
               context.functions.execute(functionName, ...args)
               
             }else if (document.event.operationType=='delete'){
@@ -80,6 +80,10 @@ exports = function(payload, response) {
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
               obj2.event.fullDocument["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
+              
+              const functionName = "test2";
+              const args = [uuid];
+              context.functions.execute(functionName, ...args)
               
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
