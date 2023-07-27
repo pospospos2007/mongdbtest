@@ -85,22 +85,22 @@ exports = function(payload, response) {
     
 
        
-      bulkOp2.execute(function(err, result) {
-            // insertedIds = insertedIds.concat(getInsertedIds(result));
-            // console.log(insertedIds);
-            const functionName = "test2";
-            // result.getInsertedIds[0]
-            const args = [2, 3];
-            context.functions.execute(functionName, ...args)
-        });
+      // bulkOp2.execute(function(err, result) {
+      //       // insertedIds = insertedIds.concat(getInsertedIds(result));
+      //       // console.log(insertedIds);
+      //       const functionName = "test2";
+      //       // result.getInsertedIds[0]
+      //       const args = [2, 3];
+      //       context.functions.execute(functionName, ...args)
+      //   });
         
      
-        // bulkOp2.execute().then(() => {
-        //     const functionName = "test2";
-        //     const args = [2, 3];
-        //     context.functions.execute(functionName, ...args)
+        bulkOp2.execute().then((err, result) => {
+            const functionName = "test2";
+            const args = [result.getInsertedIds[0], 3];
+            context.functions.execute(functionName, ...args)
            
-        // })
+        })
         
         
         
