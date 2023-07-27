@@ -57,6 +57,7 @@ exports = function(payload, response) {
               delete obj2.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
+              obj2.event.fullDocument["operation_type"] =  document.event.operationType;
               bulkOp2.find({ _id:document._id }).upsert().updateOne({$set:obj2.event.fullDocument})
               
               // const functionName = "test2";
