@@ -59,7 +59,7 @@ exports = function(payload, response) {
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
-              bulkOp2.insert({$set:obj2.event.fullDocument})
+              bulkOp2.insert(obj2.event.fullDocument)
               
               // const functionName = "test2";
               // const args = [2, 3];
