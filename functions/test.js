@@ -54,8 +54,8 @@ exports = function(payload, response) {
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
               let obj2 = document;
-              delete obj.event.fullDocument._id;
               obj2.event.fullDocument["document_id"] = obj2.event.fullDocument._id;
+              delete obj.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
