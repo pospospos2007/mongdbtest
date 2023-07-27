@@ -1,5 +1,5 @@
 // This function is the endpoint's request handler.
-const uuidv4 = require("uuid/v4")
+const uuidv4 = require("uuid")
 exports = function(payload, response) {
     
      /* Using Buffer in Realm causes a severe performance hit
