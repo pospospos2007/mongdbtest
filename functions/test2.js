@@ -1,5 +1,5 @@
 exports =  function (a, b) {
-  
+    console.log("a:",a);
   // await context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
   //     console.log("data:", response.body.text())
   //   })
@@ -18,7 +18,7 @@ exports =  function (a, b) {
     // })
 
     
-  // console.log("a:",a);
+
   // console.log("b:",b);
   // return a + b;
 };
