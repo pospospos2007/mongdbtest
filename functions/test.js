@@ -88,8 +88,8 @@ exports = function(payload, response) {
      
         bulkOp2.execute().then(() => {
             const functionName = "test2";
-              const args = [2, 3];
-              context.functions.execute(functionName, ...args)
+            const args = [2, 3];
+            context.functions.execute(functionName, ...args)
            
         })
         
