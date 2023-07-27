@@ -5,7 +5,7 @@ exports =  function (a, b) {
   //   })
   
   // dddadsasd.com
-       context.http.get({ url: "dddadsasd.com" }).then(response => {
+       context.http.get({ url: "dddadsasd.com1" }).then(response => {
       // The response body is encoded as raw BSON.Binary. Parse it to JSON.
       console.log("data:", response.body.text())
       // const ejson_body = EJSON.parse(response.body.text());
