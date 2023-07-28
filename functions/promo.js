@@ -21,10 +21,11 @@ exports = function(payload, response) {
             "application/json"
         )
         
-        
+        console.log("data: ",  payload.body.text())
     // Payload body is a JSON string, convert into a JavaScript Object
+        
         let data = JSON.parse(payload.body.text())
-    
+
     // Get AccessKey from Request Headers
     const firehoseAccessKey = payload.headers["X-Amz-Firehose-Access-Key"]
 
