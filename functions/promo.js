@@ -44,48 +44,19 @@ exports = function(payload, response) {
         })
 
         // // Perform operations as a bulk
-        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-products-details-qa").initializeOrderedBulkOp()
-        const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
+        const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-promotion-detail-qa").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
               bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
-              // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
-              let obj2 = document;
-              let uuid = uuidv4();
-              obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
-              delete obj2.event.fullDocument._id;
-              obj2.event.fullDocument["is_send"]= false;
-              obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
-              obj2.event.fullDocument["operation_type"] =  document.event.operationType;
-              obj2.event.fullDocument["_id"] = uuid;
-              bulkOp2.insert(obj2.event.fullDocument)
-              
-              const functionName = "test2";
-              const args = [uuid];
-              context.functions.execute(functionName, ...args)
+            
               
             }else if (document.event.operationType=='delete'){
               bulkOp.find({ _id:document._id }).delete();
               
-              let obj2 = document;
-              let uuid = uuidv4();
-              obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
-              delete obj2.event.fullDocument._id;
-              obj2.event.fullDocument["is_send"]= false;
-              obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
-              obj2.event.fullDocument["operation_type"] =  document.event.operationType;
-              obj2.event.fullDocument["_id"] = uuid;
-              bulkOp2.insert(obj2.event.fullDocument)
-              
-              const functionName = "test2";
-              const args = [uuid];
-              context.functions.execute(functionName, ...args)
-              
-              // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
             }
             
@@ -93,22 +64,7 @@ exports = function(payload, response) {
 
     
 
-       
-      // bulkOp2.execute(function(err, result) {
-      //       // insertedIds = insertedIds.concat(getInsertedIds(result));
-      //       // console.log(insertedIds);
-      //       const functionName = "test2";
-      //       // result.getInsertedIds[0]
-      //       const args = [2, 3];
-      //       context.functions.execute(functionName, ...args)
-      //   });
-        
-     
-        bulkOp2.execute().then(() => {
-            
-           
-        })
-        
+
         
         
           
@@ -122,32 +78,10 @@ exports = function(payload, response) {
             }))
             return 
         })
-        // .catch((error) => {
-        //     // Catch any error with execution and return a 500 
-        //     response.setStatusCode(500)
-        //     response.setBody(JSON.stringify({
-        //         requestId:  Math.floor(Math.random() * 1000),
-        //         timestamp: (new Date()).getTime(),
-        //         errorMessage: error
-        //     }))
-        //     return 
-        // })
-            
-    
-    // return payload.body.text();
-    // return data;
+
     
     } else {
-      
-
-        
-        
-        // context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
-      // The response body is encoded as raw BSON.Binary. Parse it to JSON.
-      // console.log(response.data)
-      // const ejson_body = EJSON.parse(response.body.text());
-      // return ejson_body;
-    // })
+    
         
  
     
