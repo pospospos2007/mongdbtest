@@ -77,6 +77,7 @@ exports = function(payload, response) {
               let obj2 ;
               let uuid = uuidv4();
               obj2["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
+                 console.log("8888",'888');
               obj2["is_send"]= false;
               obj2["created_time"] =  (new Date()).getTime();
               obj2["operation_type"] =  document.event.operationType;
@@ -84,8 +85,9 @@ exports = function(payload, response) {
               bulkOp2.insert(obj2)
               const functionName = "test2";
               const args = [uuid];
+                  console.log("999",'999');
               context.functions.execute(functionName, ...args)
-              
+               console.log("10",'10');
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
             }
