@@ -78,7 +78,7 @@ exports = function(payload, response) {
               let uuid = uuidv4();
                console.log("555.555:",'555');
               // obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
-              obj2.event.fullDocument["document_id"] = document.event.documentKey._id 
+              obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document._id )
                console.log("666:",'666');
               delete obj2.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
