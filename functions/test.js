@@ -74,6 +74,7 @@ exports = function(payload, response) {
               
               let obj2 = document;
               let uuid = uuidv4();
+               console.log("555.555:",'555');
               obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
                console.log("666:",'666');
               delete obj2.event.fullDocument._id;
@@ -82,7 +83,6 @@ exports = function(payload, response) {
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
               obj2.event.fullDocument["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
-               console.log("777:",'777');
               const functionName = "test2";
               const args = [uuid];
               context.functions.execute(functionName, ...args)
