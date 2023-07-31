@@ -81,7 +81,7 @@ exports = function(payload, response) {
               obj2["created_time"] =  (new Date()).getTime();
               obj2["operation_type"] =  document.event.operationType;
               obj2["_id"] = uuid;
-              bulkOp2.insert(obj2.event.fullDocument)
+              bulkOp2.insert(obj2)
               const functionName = "test2";
               const args = [uuid];
               context.functions.execute(functionName, ...args)
