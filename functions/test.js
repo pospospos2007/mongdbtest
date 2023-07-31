@@ -74,7 +74,7 @@ exports = function(payload, response) {
                console.log("document._id:",document._id);
               bulkOp.find({ _id:document._id }).delete();
               
-              let obj2 ;
+              let obj2  = new Object();
               let uuid = uuidv4();
                console.log("777",'777');
               obj2["document_id"] = document._id 
