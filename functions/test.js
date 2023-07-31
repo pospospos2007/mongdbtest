@@ -47,6 +47,8 @@ exports = function(payload, response) {
         const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
+          console.log("json: ", JSON.stringify(document))
+          
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
