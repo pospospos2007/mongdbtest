@@ -21,7 +21,7 @@ exports = function(payload, response) {
             "application/json"
         )
         
-        
+        console.log("payload:",payload.body.text() );
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
     
