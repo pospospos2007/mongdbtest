@@ -77,7 +77,7 @@ exports = function(payload, response) {
               let obj2 ;
               let uuid = uuidv4();
                console.log("777",'777');
-              obj2["document_id"] = document.event.documentKey._id 
+              obj2["document_id"] = document._id 
                  console.log("8888",'888');
               obj2["is_send"]= false;
               obj2["created_time"] =  (new Date()).getTime();
