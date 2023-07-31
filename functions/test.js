@@ -21,7 +21,6 @@ exports = function(payload, response) {
             "application/json"
         )
         
-        console.log("payload:",payload.body.text() );
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
     
@@ -69,18 +68,21 @@ exports = function(payload, response) {
               context.functions.execute(functionName, ...args)
               
             }else if (document.event.operationType=='delete'){
+              
+               console.log("555:",'555');
               bulkOp.find({ _id:document._id }).delete();
               
               let obj2 = document;
               let uuid = uuidv4();
               obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
+               console.log("666:",'666');
               delete obj2.event.fullDocument._id;
               obj2.event.fullDocument["is_send"]= false;
               obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
               obj2.event.fullDocument["operation_type"] =  document.event.operationType;
               obj2.event.fullDocument["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
-              
+               console.log("777:",'777');
               const functionName = "test2";
               const args = [uuid];
               context.functions.execute(functionName, ...args)
@@ -91,7 +93,7 @@ exports = function(payload, response) {
             
         })
 
-     console.log("444:",'444');
+    
 
        
       // bulkOp2.execute(function(err, result) {
