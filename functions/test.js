@@ -76,6 +76,7 @@ exports = function(payload, response) {
               
               let obj2 ;
               let uuid = uuidv4();
+               console.log("777",'777');
               obj2["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
                  console.log("8888",'888');
               obj2["is_send"]= false;
