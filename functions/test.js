@@ -22,6 +22,7 @@ exports = function(payload, response) {
         )
         
     // Payload body is a JSON string, convert into a JavaScript Object
+    console.log("data: ",payload.body.text());
         let data = JSON.parse(payload.body.text())
     
     // Get AccessKey from Request Headers
@@ -86,9 +87,9 @@ exports = function(payload, response) {
               bulkOp2.insert(obj2)
               const functionName = "test2";
               const args = [uuid];
-                  console.log("999",'999');
               context.functions.execute(functionName, ...args)
-               console.log("10",'10');
+              
+              
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
             }
