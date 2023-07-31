@@ -24,7 +24,7 @@ exports = function(payload, response) {
         console.log("payload:",payload.body.text() );
     // Payload body is a JSON string, convert into a JavaScript Object
         let data = JSON.parse(payload.body.text())
-    console.log("2222:",'2222');
+    
     // Get AccessKey from Request Headers
     const firehoseAccessKey = payload.headers["X-Amz-Firehose-Access-Key"]
 
@@ -42,7 +42,7 @@ exports = function(payload, response) {
                 _id: new BSON.ObjectId(document.event.documentKey._id )
             }
         })
-
+      console.log("333:",'333');
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-products-details-qa").initializeOrderedBulkOp()
         const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
