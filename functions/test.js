@@ -74,17 +74,13 @@ exports = function(payload, response) {
                console.log("document._id:",document._id);
               bulkOp.find({ _id:document._id }).delete();
               
-              let obj2 = document;
+              let obj2 ;
               let uuid = uuidv4();
-               console.log("555.555:",'555');
-              // obj2.event.fullDocument["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
-              // obj2.event.fullDocument["document_id"] = document._id 
-               console.log("666:",'666');
-              delete obj2.event.fullDocument._id;
-              obj2.event.fullDocument["is_send"]= false;
-              obj2.event.fullDocument["created_time"] =  (new Date()).getTime();
-              obj2.event.fullDocument["operation_type"] =  document.event.operationType;
-              obj2.event.fullDocument["_id"] = uuid;
+              obj2["document_id"] = new BSON.ObjectId(document.event.documentKey._id )
+              obj2["is_send"]= false;
+              obj2["created_time"] =  (new Date()).getTime();
+              obj2["operation_type"] =  document.event.operationType;
+              obj2["_id"] = uuid;
               bulkOp2.insert(obj2.event.fullDocument)
               const functionName = "test2";
               const args = [uuid];
