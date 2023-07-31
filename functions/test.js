@@ -42,7 +42,7 @@ exports = function(payload, response) {
                 _id: new BSON.ObjectId(document.event.documentKey._id )
             }
         })
-      console.log("333:",'333');
+     
         // // Perform operations as a bulk
         const bulkOp = context.services.get("mongodb-atlas").db("test").collection("dpt-products-details-qa").initializeOrderedBulkOp()
         const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
@@ -91,7 +91,7 @@ exports = function(payload, response) {
             
         })
 
-    
+     console.log("444:",'444');
 
        
       // bulkOp2.execute(function(err, result) {
