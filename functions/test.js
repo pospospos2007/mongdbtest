@@ -71,7 +71,7 @@ exports = function(payload, response) {
               
             }else if (document.event.operationType=='delete'){
               
-               console.log("555:",'555');
+               console.log("document._id:",document._id);
               bulkOp.find({ _id:document._id }).delete();
               
               let obj2 = document;
