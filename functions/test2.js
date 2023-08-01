@@ -5,7 +5,7 @@ exports =  function (uuid) {
   //   })
     // console.log("uuid:",uuid);
   // dddadsasd.com
-       context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
+       context.http.get({ url: "dddadsasd.com" }).then(response => {
          
          if(response){
              const bulkOperations = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp();
