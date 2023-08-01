@@ -22,7 +22,7 @@ exports = function(payload, response) {
         )
         
     // Payload body is a JSON string, convert into a JavaScript Object
-    console.log("data: ",payload.body.text());
+    // console.log("data: ",payload.body.text());
         let data = JSON.parse(payload.body.text())
     
     // Get AccessKey from Request Headers
@@ -48,7 +48,7 @@ exports = function(payload, response) {
         const bulkOp2 = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp()
         documents.forEach((document) => {
           
-          console.log("json: ", JSON.stringify(document))
+          // console.log("json: ", JSON.stringify(document))
           
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
@@ -72,7 +72,7 @@ exports = function(payload, response) {
               
             }else if (document.event.operationType=='delete'){
               
-               console.log("document._id:",document._id);
+              // console.log("document._id:",document._id);
               bulkOp.find({ _id:document._id }).delete();
               
               let obj2  = new Object();
