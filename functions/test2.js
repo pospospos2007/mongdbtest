@@ -6,6 +6,16 @@ exports =  function (uuid) {
     // console.log("uuid:",uuid);
   // dddadsasd.com
        context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
+         
+         if(response){
+             const bulkOperations = context.services.get("mongodb-atlas").db("test").collection("update-data-status").initializeOrderedBulkOp();
+             bulkOperations.find({ _id:uuid}).upsert().updateOne({$set:{is_send : true}})
+             bulkOperations.execute().then(() => {
+            
+           
+             })
+
+         }
       // The response body is encoded as raw BSON.Binary. Parse it to JSON.
       // console.log("data:", response.body.text())
       // const ejson_body = EJSON.parse(response.body.text());
