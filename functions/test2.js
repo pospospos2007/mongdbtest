@@ -5,6 +5,8 @@ exports =  function (uuid) {
   //   })
     // console.log("uuid:",uuid);
   // dddadsasd.com
+  
+   //TODO before calling , you have to check if update-data-status has the the same task for same document KEY, if so, add it into queue , if no, send the notification.
        context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
          
          if(response){
