@@ -11,7 +11,7 @@ exports = async function (uuid) {
   const item = await collection.findOne({ document_id:'62848b5a24d99ab49659ffad',is_send:false});
 
 console.log("data: ", item);
-
+//
    //TODO before calling , you have to check if update-data-status has the the same task for same document KEY, if so, add it into queue , if no, send the notification.
     //   context.http.get({ url: "https://api.github.com/users/mapbox" }).then(response => {
          
