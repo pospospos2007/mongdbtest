@@ -49,7 +49,7 @@ exports = function(payload, response) {
         documents.forEach((document) => {
           
           // console.log("json: ", JSON.stringify(document))
-          
+              console.log("operation Type",document.event.operationType)
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
