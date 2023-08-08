@@ -39,7 +39,7 @@ exports = function(payload, response) {
             const document = JSON.parse(decodeBase64(record.data))
             return {
                 ...document,
-                _id: new BSON.ObjectId(document.event.documentKey._id )
+                _id: document.event.documentKey._id 
             }
         })
      
