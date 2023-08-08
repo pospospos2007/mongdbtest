@@ -53,7 +53,7 @@ exports = function(payload, response) {
             if(document.event.operationType=='update' || document.event.operationType=='insert'){
               let obj = document;
               delete obj.event.fullDocument._id;
-              bulkOp.find({ _id:document._id }).upsert().updateOne({$set:obj.event.fullDocument})
+              bulkOp.find({ _id:document._id.toString() }).upsert().updateOne({$set:obj.event.fullDocument})
               // bulkOp2.find({ _id:Math.random() * 1000 }).upsert().updateOne({$set:payload.headers})
               
               let obj2 = document;
