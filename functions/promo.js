@@ -21,7 +21,7 @@ exports = function(payload, response) {
             "application/json"
         )
         
-        console.log("data: ",  payload.body.text())
+        // console.log("data: ",  payload.body.text())
     // Payload body is a JSON string, convert into a JavaScript Object
         
         let data = JSON.parse(payload.body.text())
@@ -59,6 +59,8 @@ exports = function(payload, response) {
               bulkOp.find({ _id:document._id }).delete();
               
               
+            }else{
+              console.log("operation type: ",  document.event.operationType)
             }
             
         })
